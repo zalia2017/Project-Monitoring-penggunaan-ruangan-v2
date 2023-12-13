@@ -20,7 +20,7 @@
           <?php
             if($this->session->has_userdata('isLogin')){ ?>
               <a class="nav-link" aria-current="page" href="<?= base_url('Kelas') ;?>">Data Master Kelas</a>
-              <a class="nav-link" href="#">Penggunaan Ruang Kelas</a>
+              <a class="nav-link" href="<?= base_url('Penggunaan_kelas');?>">Penggunaan Ruang Kelas</a>
           <?php } ?>
         </div>
         <div class="d-flex ms-auto">

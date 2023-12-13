@@ -29,18 +29,18 @@ class Auth extends CI_Controller {
 
 		if($username == 'Admin123' && $password == '123'){
 			$this->session->set_userdata(['isLogin' => '1']);
-			redirect(base_url('Kelas'));
+			redirect(base_url('Penggunaan_kelas'));
 		}else{
 			$this->session->set_flashdata('pesan', '<div class="alert alert-danger alert-message role="alert">
 			Username atau Password Salah</div>');
-			redirect(base_url('Kelas'));
+			redirect(base_url('Penggunaan_kelas'));
 		}
 	}
 
 	public function logout()
 	{
 		$this->session->unset_userdata('isLogin');
-		redirect(base_url('Kelas'));
+		redirect(base_url('Penggunaan_kelas'));
 	}
 
 
