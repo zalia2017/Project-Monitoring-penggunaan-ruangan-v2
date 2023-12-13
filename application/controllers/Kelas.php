@@ -21,10 +21,10 @@ class Kelas extends CI_Controller {
 	public function index()
 	{
 		$data['kelas'] = $this->db->get('tb_ruang_kelas');
-		$this->load->view('admin/header');
-		$this->load->view('admin/data-kelas', $data);
-		$this->load->view('admin/modal');
-		$this->load->view('admin/footer');
+		$this->load->view('header');
+		$this->load->view('data-kelas', $data);
+		$this->load->view('modal');
+		$this->load->view('footer');
 	}
 
 	public function simpan()
@@ -42,6 +42,46 @@ class Kelas extends CI_Controller {
 
 		$this->session->set_flashdata('pesan', '<div class="alert alert-success alert-message role="alert">
 			Data berhasil ditambahkan!!.</div>');
+		redirect(base_url('Kelas'));
+	}
+	public function showKelas()
+	{
+		$id = $this->uri->segment(3);
+		$kelas = $this->db->get_where('tb_ruang_kelas', array('id_kelas', $id));
+		$this->db->where('id_kelas', $id);
+		$kelas = $this->db->get('tb_ruang_kelas')->row_array();
+		// var_dump($id);
+		header('Content-Type: application/json');
+		echo json_encode($kelas);
+	}
+
+	public function updateKelas()
+	{
+		$id = $this->input->post('id', TRUE);
+		$nama = $this->input->post('nama', TRUE);
+		$lokasi = $this->input->post('lokasi', TRUE);
+		$status = $this->input->post('status', TRUE);
+
+		$myData = [
+			'nama_kelas' => $nama,
+			'lokasi_kelas' => $lokasi,
+			'status_kelas' => $status
+		];
+		$this->db->where('id_kelas', $id);
+		$this->db->update('tb_ruang_kelas', $myData);
+
+		$this->session->set_flashdata('pesan', '<div class="alert alert-success alert-message role="alert">
+			Data berhasil diupdate.</div>');
+		redirect(base_url('Kelas'));
+	}
+
+	public function hapus()
+	{
+		$id = $this->uri->segment(3);
+		$this->db->where('id_kelas', $id);
+		$this->db->delete('tb_ruang_kelas');
+		$this->session->set_flashdata('pesan', '<div class="alert alert-success alert-message role="alert">
+				Data berhasil dihapus!!.</div>');
 		redirect(base_url('Kelas'));
 	}
 

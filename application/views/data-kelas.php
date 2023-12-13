@@ -43,7 +43,18 @@
               <td><?=$kelas['status_kelas'];?></td>
               <?php
                 if($this->session->has_userdata('isLogin')) { ?>    
-                  <td></td>
+                  <td>
+                  <button type="button" class="btn btn-warning btn-sm btn-edit-kelas" data-id="<?= $kelas['id_kelas'];?>" data-bs-toggle="modal" data-bs-target="#editKelasModal">
+                    <i class="fas fa-edit"></i> Edit
+                  </button>
+
+
+                    <a href="<?= base_url('Kelas/hapus/').$kelas['id_kelas'] ?>"
+                      onclick="return confirm('Hapus data?')" class="btn btn-danger btn-sm">
+                      <i class="fas fa-trash-alt"></i> Hapus
+                    </a>
+
+                  </td>
               <?php } ?>
             </tr>
           <?php  $a++ ;} ?>
@@ -55,7 +66,7 @@
   </div>
 </div>
 
-<!-- Modal -->
+<!-- Modal tambah kelas -->
 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
@@ -90,3 +101,15 @@
     </div>
   </div>
 </div>
+
+<!-- ------------------------->
+<!-- Modal Edit -->
+<div class="modal fade" id="editKelasModal" tabindex="-1" aria-labelledby="editKelasModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+        ..
+    </div>
+  </div>
+</div>
+
+<!-- -------------------------->

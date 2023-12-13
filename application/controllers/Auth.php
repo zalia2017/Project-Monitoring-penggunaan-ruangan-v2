@@ -30,6 +30,10 @@ class Auth extends CI_Controller {
 		if($username == 'Admin123' && $password == '123'){
 			$this->session->set_userdata(['isLogin' => '1']);
 			redirect(base_url('Kelas'));
+		}else{
+			$this->session->set_flashdata('pesan', '<div class="alert alert-danger alert-message role="alert">
+			Username atau Password Salah</div>');
+			redirect(base_url('Kelas'));
 		}
 	}
 
