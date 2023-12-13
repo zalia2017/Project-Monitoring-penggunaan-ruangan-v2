@@ -1,13 +1,14 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.0
+-- version 4.9.0.1
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 12, 2023 at 08:59 AM
--- Server version: 10.4.24-MariaDB
--- PHP Version: 7.4.29
+-- Generation Time: Dec 13, 2023 at 05:49 AM
+-- Server version: 10.4.6-MariaDB
+-- PHP Version: 7.3.9
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET AUTOCOMMIT = 0;
 START TRANSACTION;
 SET time_zone = "+00:00";
 
@@ -20,6 +21,21 @@ SET time_zone = "+00:00";
 --
 -- Database: `db_monitoring_kelas`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tb_penggunaan_kelas`
+--
+
+CREATE TABLE `tb_penggunaan_kelas` (
+  `id_penggunaan` int(11) NOT NULL,
+  `judul_kegiatan` varchar(255) DEFAULT NULL,
+  `deskripsi_kegiatan` text NOT NULL,
+  `tanggal_mulai` date NOT NULL,
+  `tanggal_selesai` date NOT NULL,
+  `id_kelas` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
@@ -39,13 +55,19 @@ CREATE TABLE `tb_ruang_kelas` (
 --
 
 INSERT INTO `tb_ruang_kelas` (`id_kelas`, `nama_kelas`, `lokasi_kelas`, `status_kelas`) VALUES
-(1, 'Ruang Lab 1', 'Lantai 1 Gedung A', 'Kosong'),
-(2, 'Ruang Lab 2', 'Lantai 1 Gedung A', 'Kosong'),
-(3, 'Ruang Lab 3', 'Lantai 1 Gedung A', 'Terisi');
+(1, 'Ruang Lab 1', 'Lantai 1 Gedung B', 'Kosong'),
+(2, 'Ruang Lab 2', 'Lantai 1 Gedung A', 'Terisi');
 
 --
 -- Indexes for dumped tables
 --
+
+--
+-- Indexes for table `tb_penggunaan_kelas`
+--
+ALTER TABLE `tb_penggunaan_kelas`
+  ADD PRIMARY KEY (`id_penggunaan`),
+  ADD KEY `id_kelas` (`id_kelas`);
 
 --
 -- Indexes for table `tb_ruang_kelas`
@@ -58,10 +80,26 @@ ALTER TABLE `tb_ruang_kelas`
 --
 
 --
+-- AUTO_INCREMENT for table `tb_penggunaan_kelas`
+--
+ALTER TABLE `tb_penggunaan_kelas`
+  MODIFY `id_penggunaan` int(11) NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT for table `tb_ruang_kelas`
 --
 ALTER TABLE `tb_ruang_kelas`
   MODIFY `id_kelas` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- Constraints for dumped tables
+--
+
+--
+-- Constraints for table `tb_penggunaan_kelas`
+--
+ALTER TABLE `tb_penggunaan_kelas`
+  ADD CONSTRAINT `kelas_penggunaan_kelas_id_foreign` FOREIGN KEY (`id_kelas`) REFERENCES `tb_ruang_kelas` (`id_kelas`) ON DELETE CASCADE ON UPDATE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
